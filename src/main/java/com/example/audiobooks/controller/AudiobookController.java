@@ -4,9 +4,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.audiobooks.model.Audiobook;
 import com.example.audiobooks.repository.AudiobookRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,11 +36,23 @@ public class AudiobookController {
     }
 
     @PostMapping
-    public String postMethodName(@RequestBody String entity) {
-        // TODO: process POST request
+    public String postNewAudiobook(@RequestBody Audiobook audiobook) {
 
+        if (audiobook == null || audiobook.getTitle() == null || audiobook.getAuthor() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid audiobook data");
+        }
+        // Assuming the entity is a valid audiobook object
+        audiobookRepository.save(audiobook);
 
-        return entity;
+        return audiobook.toString();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAudiobook(@PathVariable Long id) {
+        if (!audiobookRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "AudioBook Does Not Exist");
+        }
+        audiobookRepository.deleteById(id);
     }
 
 }
