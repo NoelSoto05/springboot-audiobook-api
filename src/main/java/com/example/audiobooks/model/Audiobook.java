@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 /**
  * Represents an audiobook entity with properties such as genre, author, title,
@@ -26,7 +27,7 @@ import jakarta.persistence.Table;
  * </pre>
  * </p>
  *
- * @author YourName
+ * @author Noel Soto
  */
 @Entity
 @Table(name = "Book")
@@ -52,6 +53,7 @@ public class Audiobook {
      * Default Constructor sets all fields to empty.
      */
     public Audiobook() {
+        this.id = null;
         this.genre = "";
         this.author = "";
         this.title = "";
@@ -67,13 +69,21 @@ public class Audiobook {
      * @param title       The title of the audiobook.
      * @param releaseYear The release year of the audiobook.
      */
-    public Audiobook(String genre, String author, String title, String releaseYear) {
-
+    public Audiobook(Long id, String genre, String author, String title, String releaseYear) {
+        this.id = id;
         this.genre = genre;
         this.author = author;
         this.title = title;
         this.releaseYear = releaseYear;
 
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setGenre(String genre) {
