@@ -11,7 +11,7 @@ public class AudiobooksApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AudiobooksApplication.class, args);
 
-		Audiobook book = new Audiobook("Mystery", "Bobby", "Haunted mansion", "2015");
+		Audiobook book = new Audiobook((long) 1.0, "Mystery", "Bobby", "Haunted mansion", "2015");
 		System.out.println(book);
 	}
 
