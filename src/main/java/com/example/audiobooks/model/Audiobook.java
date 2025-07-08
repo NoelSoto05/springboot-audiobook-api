@@ -4,10 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.validation.constraints.NotBlank;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Version;
 
 /**
  * Represents an audiobook entity with properties such as genre, author, title,
@@ -37,6 +37,7 @@ public class Audiobook {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Genre Cannot be Blank")
     @Column(name = "genre")
     private String genre;
 
@@ -54,10 +55,10 @@ public class Audiobook {
      */
     public Audiobook() {
         this.id = null;
-        this.genre = "";
-        this.author = "";
-        this.title = "";
-        this.releaseYear = "";
+        this.genre = null;
+        this.author = null;
+        this.title = null;
+        this.releaseYear = null;
     }
 
     /**
